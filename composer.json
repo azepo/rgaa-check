@@ -1,0 +1,37 @@
+{
+    "name": "azepo/rgaa-check",
+    "description": "Contrôles automatiques d'accessibilité RGAA 4.1 sur des pages HTML statiques, utilisables en ligne de commande et en intégration continue",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["rgaa", "accessibilité", "accessibility", "a11y", "wcag", "html", "static site"],
+    "require": {
+        "php": ">=8.2",
+        "ext-dom": "*",
+        "ext-mbstring": "*",
+        "masterminds/html5": "^2.9",
+        "symfony/console": "^6.4 || ^7.0",
+        "symfony/finder": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.5 || ^12.0 || ^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Azepo\\RgaaCheck\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Azepo\\RgaaCheck\\Tests\\": "tests/"
+        }
+    },
+    "bin": ["bin/rgaa-check"],
+    "scripts": {
+        "test": "phpunit",
+        "stan": "phpstan analyse src tests --level=max --no-progress"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

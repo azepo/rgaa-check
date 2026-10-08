@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Azepo\RgaaCheck\Checker;
+use Azepo\RgaaCheck\Console\CheckCommand;
+use Symfony\Component\Console\Application;
+
+// Installé comme dépendance (vendor/azepo/rgaa-check/bin), ou lancé depuis le dépôt du paquet.
+$autoload = null;
+foreach ([__DIR__.'/../../../autoload.php', __DIR__.'/../vendor/autoload.php', __DIR__.'/../../../vendor/autoload.php'] as $candidate) {
+    if (is_file($candidate)) {
+        $autoload = $candidate;
+        break;
+    }
+}
+if (null === $autoload) {
+    fwrite(\STDERR, "Dépendances introuvables : lancer « composer install ».\n");
+    exit(2);
+}
+require $autoload;
+
+$application = new Application('rgaa-check');
+$application->add(new CheckCommand(Checker::withDefaultRules()));
+$application->setDefaultCommand('check', true);
+$application->run();
